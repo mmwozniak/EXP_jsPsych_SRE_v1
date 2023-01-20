@@ -421,46 +421,6 @@
     });
 
 
-    /* ADDITIONAL QUESTIONS */
-
-    // Friend closeness on a scale
-    var friend_scale = {
-        type: jsPsychHtmlSliderResponse, 
-        stimulus: `On a scale from 1 to 7 how close do you feel to your friend from task 1?`,
-        labels: ['1: Not close at all', '2', '3', '4', '5', '6', '7:Very close'],
-        min: 1,
-        max: 7,
-        step: 1,
-        slider_start: 4,
-        data: {
-          task_id: "task_3_add", 
-          screen_id: "friend_scale",
-          time_stamp: Date()
-        }
-    }
-
-    /* add task 3 to the timeline */
-    timeline.push(friend_scale);
-
-    // Friend - inclusion of other in self scale 
-    var friend_ios = {
-        type: jsPsychHtmlButtonResponse, 
-        stimulus: `<p>On these diagrams, the left circle (labelled Self) represents you and the right circle (labelled X) 
-                represents your friend (from task 1)</p>
-                <p>Please click the number below that depicts how close you feel to your friend.</p>
-                <p><img src=\'img/IOS_scale.png\'></p>`,
-        choices: ['1', '2', '3', '4', '5', '6', '7'],
-        data: {
-          task_id: "task_3_add", 
-          screen_id: "friend_ios",
-          time_stamp: Date()
-        }
-    }
-
-    /* add task 3 to the timeline */
-    timeline.push(friend_ios);
-
-
     // Exit fullscreen mode
     timeline.push(exit_fullscreen);
 
