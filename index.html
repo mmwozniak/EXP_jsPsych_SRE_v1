@@ -11,15 +11,15 @@
     <script src="https://unpkg.com/@jspsych/plugin-html-slider-response@1.1.0"></script>
     <script src="https://unpkg.com/@jspsych/plugin-fullscreen@1.1.0"></script>
 
-    <script src="plugin-survey-text-timeout.js"></script>
+    <script src="js/plugin-survey-text-timeout.js"></script>
 
-    <script src="stimuli_task_1.js"></script>
-    <script src="stimuli_task_2.js"></script>
+    <script src="js/stimuli_task_1.js"></script>
+    <script src="js/stimuli_task_2.js"></script>
 
     <!-- Pavlovia plugin 2021.12 requires jQuery -->
     <!-- 
         <script type="text/javascript" src="lib/vendors/jquery-2.2.0.min.js"></script>
-        <script type="text/javascript" src="jspsych-7-pavlovia-2021.12.js"></script>
+        <script type="text/javascript" src="js/jspsych-7-pavlovia-2021.12.js"></script>
     -->
 	
     <link href="https://unpkg.com/jspsych@7.1.2/css/jspsych.css" rel="stylesheet" type="text/css" />
@@ -364,7 +364,7 @@
     var end_of_task_2 = {
         type: jsPsychHtmlButtonResponse,
         stimulus: function() {
-            var text_message = "<p>End of task 2</p><p>You have obtained " + number_of_points + " points</p>"
+            var text_message = "<p><b>End of task 2</b></p><p>You have obtained " + (number_of_points+1) + " points</p>"
             return text_message
         },
         choices: [ "Continue" ],
@@ -448,7 +448,7 @@
         stimulus: `<p>On these diagrams, the left circle (labelled Self) represents you and the right circle (labelled X) 
                 represents your friend (from task 1)</p>
                 <p>Please click the number below that depicts how close you feel to your friend.</p>
-                <p><img src=\'IOS_scale.png\'></p>`,
+                <p><img src=\'img/IOS_scale.png\'></p>`,
         choices: ['1', '2', '3', '4', '5', '6', '7'],
         data: {
           task_id: "task_3_add", 
