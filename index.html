@@ -32,7 +32,10 @@
 <script>
 
     /* VERSION SETUP */
-    var version = 'Version A'  // "A" or "B"
+    var version = "A"  // "A" or "B" they contain different adjectives
+
+
+
 
     /* initialize jsPsych */
     var jsPsych = initJsPsych({
@@ -51,24 +54,6 @@
     };
     timeline.push(pavlovia_init);
     */
-    
-
-    // Choose stimuli version
-    if (version === "Version A") {
-        var adjectives_list = list_A
-    } else if (version === "Version B") {
-        var adjectives_list = list_B
-    }
-
-    // capture info from Qualtrics
-    var participant_code = jsPsych.data.getURLVariable('participant');
-  
-    jsPsych.data.addProperties({
-        participant_code: participant_code,
-    });
-    
-
-
 
     var enter_fullscreen = {
       type: jsPsychFullscreen,
@@ -96,38 +81,27 @@
     var intro_choose_version = {
         type: jsPsychHtmlButtonResponse,      
       stimulus: `<div style="width:700px;">
-        <h1>SELF-REFERENCE EFFECT</h1><hr>
+        <h1>EXPERIMENT</h1><hr>
         <p><b>Think of a specific friend of yours.</b></p>
-        <p>In this task you will see adjectives. Your task will be to say which of these adjectives describe you 
+        <p>In this task you will see adjectives. Your task will be to judge which of these adjectives describe you 
             and your friend.</p>
-        <p>Later you will be asked to recall some of this information. However, please DO NOT use any memorization techniques when doing this task. </p>
         </div>
         `,
-      choices: ['Version A', "Version B"],
+      choices: ['Start the experiment'],
       data: {
           task_id: "task_1", 
           screen_id: "instructions",
           time_stamp: Date(),
         },
-        on_finish: function() {
+        on_finish: function(data) {
             var version = data.response
-            console.log('Version on_finish: '+version)
+            console.log('Version selected: '+(version+1))
         }
     };
 
     /* Push the starting page */
     timeline.push(intro_choose_version);
-    console.log('Version: '+version)
     
-
-    // Choose stimuli version
-    if (version === "Version A") {
-        var adjectives_list = list_A
-    } else if (version === "Version B") {
-        var adjectives_list = list_B
-    }
-    
-
     /* set up variables */
     const start_time_total = new Date();
 
@@ -142,15 +116,15 @@
 
     /* TASK 1 SETUP */
     var fixation_duration_T1 = 500   // in ms 
-    var test_stimuli_NR = [  // only right labels count
-        { word: 'Adventurous', person: 'You', valence: 'Neutral' },
-        { word: 'Understanding', person: 'You', valence: 'Neutral' },
-        { word: 'Average', person: 'Friend', valence: 'Neutral' },
-        { word: 'Skeptical', person: 'Friend', valence: 'Neutral' }
-    ]
-    
-    // LOAD TEST STIMULI FROM THE STIMULI_T1.JS FILE
-    //var test_stimuli_NR = test_stimuli_from_file_task_1
+
+    // Choose stimuli version and load from the stimuli_task_1.js file
+    if (version === "A") {
+        var adjectives_list = list_A
+    } else if (version === "B") {
+        var adjectives_list = list_B
+    }
+
+    // Randomize the order of test stimuli
     var test_stimuli = jsPsych.randomization.repeat(adjectives_list,1)
     var n_trials = test_stimuli.length;
 
@@ -166,7 +140,7 @@
         <p>Later you will be asked to recall some of this information. However, please DO NOT use any memorization techniques when doing this task. </p>
         </div>
         `,
-      choices: ['Start the experiment'],
+      choices: ['Continue'],
       data: {
           task_id: "task_1", 
           screen_id: "instructions",
